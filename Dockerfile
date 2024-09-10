@@ -1,12 +1,11 @@
 FROM liyaosong/debootstrap AS build
 
 USER root
-
-RUN debootstrap --variant minbase \
-    --no-check-gpg 10.1 \
-    kylint-v10.1 \
-    http://archive.kylinos.cn/kylin/KYLIN-ALL \
-    gutsy
+RUN debootstrap \
+    --components main,universe,multiverse,restricted \
+    --variant minbase \
+    --exclude bash \
+    --no-check-gpg 10.1 kylin-v10.1 http://archive.kylinos.cn/kylin/KYLIN-ALL gutsy
 
 RUN chroot kylint-v10.1 apt-get update
 RUN chroot kylint-v10.1 apt-get upgrade -y
@@ -34,6 +33,6 @@ LABEL maintainer="liyaosong <liyaosong1@qq.com>"
 LABEL version=v10.1
 LABEL description="kylin V10.1 SP1."
 
-COPY --from=build /kylint-v10.1 /
+COPY --from=build /kylin-v10.1 /
 
 CMD ["bash"]
