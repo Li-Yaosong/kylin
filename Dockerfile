@@ -12,7 +12,7 @@ RUN apt-get update && \
     apt-get install curl -y && \
     curl https://archive.kylinos.cn/kylin/KYLIN-ALL/pool/main/b/bash/bash_5.0-6kylin1_amd64.deb --output ./bash.deb && \
     dpkg-deb -x ./bash.deb ./temp/ && \
-    cp ./temp/bin.bash ./kylin-v10.1/bin/bash
+    cp ./temp/bin/bash ./kylin-v10.1/bin/bash
 
 RUN chroot kylin-v10.1 apt-get update && \
     chroot kylin-v10.1 apt-get upgrade -y && \
