@@ -18,6 +18,8 @@ RUN chroot kylin-v10.1 apt-get update && \
     chroot kylin-v10.1 apt-get upgrade -y && \
     chroot kylin-v10.1 apt-get autoremove -y && \
     chroot kylin-v10.1 apt-get clean
+    
+RUN chroot kylin-v10.1 useradd -m kylin
 
 RUN rm -rf \
     kylin-v10.1/var/lib/apt/lists/* \
