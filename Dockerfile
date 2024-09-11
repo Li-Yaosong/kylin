@@ -45,6 +45,6 @@ LABEL description="kylin V10.1 SP1."
 
 COPY --from=build /kylin-v10.1 /
 
-USER kylin
+# USER kylin
 
 CMD ["bash"]
