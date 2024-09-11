@@ -7,24 +7,24 @@ RUN debootstrap \
     --exclude bash \
     --no-check-gpg 10.1 kylin-v10.1 http://archive.kylinos.cn/kylin/KYLIN-ALL gutsy
 
-RUN chroot kylint-v10.1 apt-get update
-RUN chroot kylint-v10.1 apt-get upgrade -y
-RUN chroot kylint-v10.1 apt-get autoremove -y
-RUN chroot kylint-v10.1 apt-get clean
+RUN chroot kylin-v10.1 apt-get update
+RUN chroot kylin-v10.1 apt-get upgrade -y
+RUN chroot kylin-v10.1 apt-get autoremove -y
+RUN chroot kylin-v10.1 apt-get clean
 RUN rm -rf \
-    kylint-v10.1/var/lib/apt/lists/* \
-    kylint-v10.1/tmp/* \
-    kylint-v10.1/var/tmp/* \
-    kylint-v10.1/root/.cache \
-    kylint-v10.1/var/cache/apt/archives/*.deb \
-    kylint-v10.1/var/cache/apt/*.bin \
-    kylint-v10.1/var/lib/apt/lists/* \
-    kylint-v10.1/usr/share/*/*/*/*.gz \
-    kylint-v10.1/usr/share/*/*/*.gz \
-    kylint-v10.1/usr/share/*/*.gz \
-    kylint-v10.1/usr/share/doc/*/README* \
-    kylint-v10.1/usr/share/doc/*/*.txt \
-    kylint-v10.1/usr/share/locale/*/LC_MESSAGES/*.mo 
+    kylin-v10.1/var/lib/apt/lists/* \
+    kylin-v10.1/tmp/* \
+    kylin-v10.1/var/tmp/* \
+    kylin-v10.1/root/.cache \
+    kylin-v10.1/var/cache/apt/archives/*.deb \
+    kylin-v10.1/var/cache/apt/*.bin \
+    kylin-v10.1/var/lib/apt/lists/* \
+    kylin-v10.1/usr/share/*/*/*/*.gz \
+    kylin-v10.1/usr/share/*/*/*.gz \
+    kylin-v10.1/usr/share/*/*.gz \
+    kylin-v10.1/usr/share/doc/*/README* \
+    kylin-v10.1/usr/share/doc/*/*.txt \
+    kylin-v10.1/usr/share/locale/*/LC_MESSAGES/*.mo 
 
 
 FROM scratch
