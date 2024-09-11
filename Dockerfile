@@ -1,5 +1,6 @@
 FROM liyaosong/debootstrap AS build
 
+ARG SOU
 USER root
 RUN debootstrap \
     --components main,universe,multiverse,restricted \
@@ -7,10 +8,16 @@ RUN debootstrap \
     --exclude bash \
     --no-check-gpg 10.1 kylin-v10.1 http://archive.kylinos.cn/kylin/KYLIN-ALL gutsy
 
-RUN chroot kylin-v10.1 apt-get update
-RUN chroot kylin-v10.1 apt-get upgrade -y
-RUN chroot kylin-v10.1 apt-get autoremove -y
-RUN chroot kylin-v10.1 apt-get clean
+RUN apt-get install curl -y && \
+    curl https://archive.kylinos.cn/kylin/KYLIN-ALL/pool/main/b/bash/bash_5.0-6kylin1_amd64.deb --output ./bash.deb && \
+    dpkg-deb -x ./bash.deb ./temp/ && \
+    cp ./temp/bin.bash ./kylin-v10.1/bin/bash
+
+RUN chroot kylin-v10.1 apt-get update && \
+    chroot kylin-v10.1 apt-get upgrade -y && \
+    chroot kylin-v10.1 apt-get autoremove -y && \
+    chroot kylin-v10.1 apt-get clean
+
 RUN rm -rf \
     kylin-v10.1/var/lib/apt/lists/* \
     kylin-v10.1/tmp/* \
@@ -34,5 +41,7 @@ LABEL version=v10.1
 LABEL description="kylin V10.1 SP1."
 
 COPY --from=build /kylin-v10.1 /
+
+USER kylin
 
 CMD ["bash"]
